@@ -1,0 +1,144 @@
+use ( 'Airport');
+
+
+// db.Aviones.insertOne(
+//     {
+       
+//       marca: 'Airbus',
+//       fabricante: {
+//         nombre: 'Mechante',
+//         nacionalidad: 'Argentina'
+//       },
+//       color: 'Negro',
+//       capacidad: 72,
+//       capacidad_carga: '688',
+//       tipo: 'Boeing 737 '
+//     }
+//   );
+
+//   db.Empleados.insertOne(
+//     {  
+//         documento: 35356155,
+//         nombre_empleado: 'Sementoss',
+//         Vestimenta: {
+//           traje: 'Mech',
+//           horario: 'LYV'
+//         },
+//         cargo: 'Canson',
+//         fecha_de_ingreso: '2022',
+//         salario: 368641
+//       }
+//   );
+
+//   db.Usuarios.insertOne(
+//     {  
+//         tickets: 5,
+//         precio: "$407.37",
+//         escala: {
+//           primeraEscala: 'Bogota',
+//           SegundaEscala: 'Boston'
+//         },
+//         Destino: 'Barcelona',
+//         nombre_usuario: 'Mateo',
+//         numero_puesto: '2'
+//       }
+//   )
+
+//leer
+// db.Aviones.find({'fabricante.nacionalidad':'Argentina'})
+
+// db.Empleados.find({'Vestimenta.traje':'Mech'})
+
+// db.Usuarios.find({'escala.primeraEscala':'Bogota'})
+
+//update
+// db.Aviones.updateOne(
+//     { 
+//         "fabricante" : "Mechante"
+//     },
+//     { 
+//         $set: {
+//             "nacionalidad" : "Colombiana"
+//         }
+//     }
+//  );
+
+// db.Empleados.updateOne(
+//     { 
+//         "documento" : "35356155"
+//     },
+//     { 
+//         $set: {
+//             "cargo" : "canson"
+//         }
+//     }
+//  );
+
+// db.Usuarios.updateOne(
+//     { 
+//         tickets : "5"
+//     },
+//     { 
+//         $set: {
+//             destino : "Barcelona"
+//         }
+//     }
+//  );
+
+
+// Eliminar
+
+// db.Aviones.remove({'fabricante.nombre':'Mechante'})
+
+// db.Empleados.remove({'Vestimenta.traje':'Mech'})
+
+// db.Usuarios.remove({'escala.primeraEscala':'Bogota'})
+
+//Agregacionespor operador
+
+// db.getCollection("Usuarios").aggregate([
+//     { $match: { Destino: 'Barcelona' } },
+//     { $project: { _id: 0, 'precio': 1, 'Destino': 1, "tickets": 1 } },
+//     { $sort: { 'precio': 1 } },
+//     { $limit: 10 }
+// ])
+
+
+// db.getCollection("Empleados").aggregate([
+//     { $match: { cargo: 'Jefe' } },
+//     { $project: { _id: 0, 'cargo': 1, 'nombre_empleado': 1, "documento": 1 } },
+//     { $sort: { 'documento': 1 } },
+//     { $limit: 10 }
+// ])
+
+
+// db.getCollection("Aviones").aggregate([
+//     { $match: { marca: 'Airbus' } },
+//     { $project: { _id: 0, tipo: 1, marca: 1, capacidad: 1 } },
+//     { $sort: { capacidad: 1 } },
+//     { $limit: 10 }
+// ])
+
+//indices
+
+// db.Empleados.createIndex({ "nombre_empleado": 1 }),
+// db.Empleados.find({nombre_empleado: 'Sementoss'}),
+
+// db.Empleados.createIndex({"cargo": 1, "nombre_empleado": 1}),
+// db.Empleados.find({nombre_empleado: "Sementoss", cargo: 'Canson'})
+
+
+
+// db.Aviones.createIndex({ "marca": 1 }),
+// db.Aviones.find({marca: 'Airbus'}),
+
+// db.Aviones.createIndex({"capacidad": 1, "marca": 1}),
+// db.Aviones.find({capacidad: 72, marca: 'Airbus'})
+
+
+
+db.Usuarios.createIndex({ "nombre_usuario": 1 }),
+db.Usuarios.find({nombre_usuario: 'Mateo'}),
+
+db.Usuarios.createIndex({"nombre_usuarios": 1, "tickets": 1}),
+db.Usuarios.find({nombre_usuario: "Mateo", tickets: 5})
